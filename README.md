@@ -1,108 +1,136 @@
-Hybrid Python FAQ Chatbot (Retrieval + Generative AI)
-✔ Objective
+🤖 Hybrid Python FAQ Chatbot (Retrieval + Gemini AI)
 
-To develop a hybrid chatbot system capable of answering Python-related questions using:
+A smart chatbot that answers Python-related questions using a Hybrid Intelligence System:
 
-Local FAQ Retrieval (TF-IDF + Cosine Similarity)
+🔍 Retrieval-Based Answers using TF-IDF + Cosine Similarity
 
-Generative AI Fallback using Gemini 2.5 Flash
+💡 Generative AI Fallback using Gemini 2.5 Flash
 
-This ensures that every possible question receives an answer, either from pre-written FAQs or via generative AI.
+🎨 Beautiful CLI Interface with colors
 
-1. Data Preparation & Preprocessing
-FAQ Dataset
+🧠 Domain-restricted expert Python assistant
 
-A curated set of domain-specific Python FAQs was prepared, covering installation, pip usage, GIL, tuples vs lists, and ML libraries.
+This ensures every user query receives a correct, high-quality response.
 
-NLP Cleaning (nltk)
+🌟 Features
+🔹 1. Retrieval-Based Question Answering
 
-Each question was preprocessed using:
+Uses TF-IDF vectorization
 
-tokenization
+Computes cosine similarity
 
-lowercasing
+Returns the most relevant FAQ answer
 
-stop-word removal
+Threshold-based confidence (≥ 0.75)
 
-lemmatization
+🔹 2. Generative AI Fallback
 
-punctuation cleanup
+If no close FAQ match is found:
 
-This created a normalized dataset for accurate similarity matching.
+Query is automatically sent to Gemini 2.5 Flash
 
-2. Retrieval System (TF-IDF + Cosine Similarity)
-Vectorization
+System prompt restricts it to Python-only answers
 
-Each cleaned FAQ question was converted into numerical TF-IDF vectors using TfidfVectorizer.
+Prevents hallucination & off-topic responses
 
-Matching Algorithm
+🔹 3. Beautiful Console Chat UI
 
-When a user asks a question:
+Colorized prompts (yellow, blue, green, magenta)
 
-The query is preprocessed the same way.
+ASCII-styled chatbot headers
 
-A similarity score is computed with cosine similarity.
+Distinguishes retrieval & AI answers visually
 
-The highest-matching FAQ is identified.
+🔹 4. Full NLP Preprocessing
 
-Similarity Thresholding
+Using nltk:
 
-A high threshold (0.75) ensures that retrieval activates only for very close matches, preventing incorrect FAQ suggestions.
+Tokenization
 
-3. Hybrid Logic (Generative AI Fallback)
-If Match Found (≥ 0.75)
+Lowercasing
 
-→ Return precise FAQ answer
+Lemmatization
 
-If Match Not Found (< 0.75)
+Stopword removal
 
-→ Forward query to Gemini 2.5 Flash with a strict system instruction:
+Punctuation cleanup
 
-“You are an expert Python programming assistant. Only answer Python-related questions.”
+🛠️ Tech Stack
+Component	Library / Algorithm	Purpose
+Vectorization	TfidfVectorizer	Transform questions into numeric vectors
+Similarity	Cosine Similarity	Retrieve closest FAQ match
+NLP Cleaning	nltk	Prepare data for accurate matching
+Generative AI	Gemini 2.5 Flash	AI fallback for unseen queries
+Console UI	colorama	Colored user experience
+📌 Project Workflow
+User Question
+      ↓
+Preprocessing (nltk)
+      ↓
+TF-IDF Vectorize
+      ↓
+Cosine Similarity ≥ 0.75?
+      ↙                     ↘
+Yes (FAQ Match)       No (Fallback to Gemini)
+Return Answer          Generate Python-specific answer
 
-This prevents off-topic hallucinations and keeps output domain-specific.
+📚 Example Chat Outputs
 
-Error Handling
+✔ Retrieval example:
 
-Handled API errors, missing keys, and exceptions gracefully.
+User: How to install software on Windows?
+Bot: Similar question found!
+FAQ Match: "How to install Python?"
+Answer: Download Python from python.org...
+Similarity: 77.8%
 
-4. User Interface (CLI)
 
-A professional, color-coded interface was created using colorama.
+✔ Fallback example:
 
-Features include:
+User: What is a decorator in Python?
+Bot: This question is not in my FAQs, using generative AI…
+Bot: A decorator is a function that modifies another function...
 
-Color-coded distinction of Retrieval answers and AI answers
 
-Pretty ASCII-styled chatbot boxes
+✔ Domain restriction:
 
-User prompt styling
+User: What is the capital of France?
+Bot: I only answer Python-related questions.
 
-Display of similarity score for transparency
+▶️ Running the Chatbot
+1. Install dependencies
+pip install nltk scikit-learn google-generativeai colorama
 
-5. Demonstration Output (Working Proof)
+2. Add your Gemini API key
+genai.configure(api_key="YOUR_API_KEY")
 
-The log clearly demonstrates:
+3. Run the chatbot
+python chatbot.py
 
-Gemini Response for Novel Questions
+🏆 What This Project Demonstrates
 
-✔ “What is a decorator?” → Gemini
-✔ “What is Python?” → Gemini
-✔ “Difference between Python 2 and 3?” → Gemini
-✔ “factorial function?” → Gemini
+Real chatbot engineering
 
-Retrieval Match
+NLP preprocessing
 
-✔ “How to install software on Windows?”
-Matched with FAQ: How to install Python? → 77.8% similarity
+Retrieval vs Generative AI
 
-Domain Restriction Working
+API integration
 
-✔ “What is the capital of France?” →
-Bot refuses and enforces Python-only rule.
+Hybrid intelligence systems
 
-Exit Condition
+Console UI design
 
-✔ “quit” → graceful shutdown
+Exception handling
 
-Everything in your logs shows perfect hybrid operation.
+Production-quality code structure
+
+Perfect for:
+
+University submission
+
+AI/Machine Learning assignments
+
+Software engineering portfolio
+
+GitHub showcase
